@@ -3,10 +3,17 @@ import asyncio
 import random
 async def fetch(delay: int):
     await asyncio.sleep(delay)
-    return random(1,20)
+    wynik = random.randint(1,20)
+    print(wynik)
+    return wynik
 
 async def main() -> None:
-    pierwsze = await fetch(3)
-    drugie = await fetch(4)
-    trzecie = await fetch(1)
-    czwarte = await fetch(10)
+    lista = [1,3,2,5]
+    kolejne = [fetch(d) for d in lista]
+    wynik = await asyncio.gather(*kolejne)
+    print("wszystkie wyniki")
+    for i in wynik:
+        print(i)
+
+if __name__ == "__main__":
+    asyncio.run(main())
